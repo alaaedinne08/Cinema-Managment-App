@@ -1,0 +1,135 @@
+# 🎬 eTickets — Cinema Management App
+
+A full-featured cinema management web application built with **ASP.NET Core** and **Entity Framework Core**. The app allows administrators to manage cinemas, movies, actors, and producers, while users can browse and interact with the platform through a secure authenticated interface.
+
+---
+
+## 🚀 Features
+
+- Full **CRUD operations** for Movies, Cinemas, Actors, and Producers
+- **Many-to-many relationship** between Actors and Movies
+- **ASP.NET Identity** for user authentication and registration
+- **Email sender service** via `IEmailSender` interface
+- **Dependency Injection** with scoped services (`AddScoped`)
+- **Database seeding** via `AppDbInitializer` for initial data
+- **ViewModels** for clean separation between data and UI layers
+- **Enums** for structured data categorization
+- Responsive UI built with Bootstrap and Razor Views
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | ASP.NET Core (.NET 6+) |
+| Language | C# |
+| Authentication | ASP.NET Identity (Scaffolded) |
+| ORM | Entity Framework Core (Code First) |
+| Database | SQL Server |
+| Frontend | Razor Views, HTML5, CSS3, Bootstrap |
+| Architecture | MVC + Service Layer + Repository Base |
+
+---
+
+## 📁 Project Structure
+
+```
+eTickets/
+├── Areas/Identity/Pages/   # Scaffolded ASP.NET Identity (login, register)
+├── Controllers/            # ActorsController, CinemasController,
+│                           # MoviesController, ProducersController
+├── Data/
+│   ├── Base/               # Base repository / service classes
+│   ├── Enums/              # Enum definitions (e.g. MovieCategory)
+│   ├── Services/           # Business logic service layer
+│   ├── ViewModels/         # ViewModels for data binding
+│   ├── AppDbContext.cs     # EF Core DbContext with Identity
+│   └── AppDbInitializer.cs # Database seeder with default data
+├── Models/                 # Actor, Cinema, Movie, Producer, Actor_Movie
+├── services/               # AddScoped.cs, IEmailSender.cs
+├── Views/                  # Razor Views for all controllers
+├── wwwroot/                # Static files (CSS, JS, images)
+└── Program.cs              # App configuration and service registration
+```
+
+---
+
+## 🗃️ Data Model
+
+```
+Cinema ──< Movie >── Actor
+                │
+            Producer
+```
+
+- A **Cinema** hosts multiple movies
+- A **Movie** has one **Producer** and many **Actors** (via Actor_Movie join table)
+- An **Actor** can appear in many **Movies**
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+- Visual Studio 2022 or later
+- .NET 6 SDK or later
+- SQL Server (LocalDB or full instance)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/alaaedinne08/Cinema-Managment-App.git
+   cd Cinema-Managment-App
+   ```
+
+2. **Configure the connection string**
+   Open `appsettings.json` and update:
+   ```json
+   "ConnectionStrings": {
+     "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=eTicketsDb;Trusted_Connection=True;"
+   }
+   ```
+
+3. **Apply migrations**
+   Open the Package Manager Console and run:
+   ```
+   Update-Database
+   ```
+   The `AppDbInitializer` will automatically seed initial data on first run.
+
+4. **Run the application**
+   Press `F5` in Visual Studio or:
+   ```bash
+   dotnet run
+   ```
+
+---
+
+## 🔐 Authentication
+
+- Built with **ASP.NET Identity** (scaffolded pages for login, register, and account management)
+- Passwords hashed and managed by Identity
+- Protected routes using `[Authorize]` attribute
+- Email confirmation flow supported via `IEmailSender` service
+
+---
+
+## 🧠 What I Learned
+
+- Building a multi-entity application with **relational data** and junction tables
+- Implementing a **Service Layer** on top of EF Core for clean architecture
+- Using **ViewModels** to decouple domain models from the UI
+- Scaffolding and customizing **ASP.NET Identity**
+- Registering services with **Dependency Injection** (`AddScoped`)
+- Seeding the database with `AppDbInitializer`
+- Managing complex relationships (many-to-many) with Entity Framework Core
+
+---
+
+## 👤 Author
+
+**Alaa Eddine Karka**
+[GitHub](https://github.com/alaaedinne08) · [LinkedIn](https://www.linkedin.com/in/alaa-eddine-karka) · Vercelli, Italy
